@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flamel Factory — Brand System v0.1</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Geist + Geist Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens — Flamel Factory ─── */
+    :root {
+      /* Greyscale — fond clair */
+      --g-0:   #FFFFFF;
+      --g-50:  #FAFAF9;
+      --g-100: #F2F2F0;
+      --g-200: #E4E4E0;
+      --g-300: #CBCBC6;
+      --g-500: #87877F;
+      --g-700: #3A3A36;
+      --g-900: #0E0E0C;
+
+      /* Accent */
+      --accent:      #207BF9;
+      --accent-light: rgba(32, 123, 249, 0.09);
+      --accent-mid:   rgba(32, 123, 249, 0.25);
+
+      /* Utilitaires */
+      --u-green:  #16A34A;
+      --u-red:    #DC2626;
+      --u-amber:  #D97706;
+      --u-sky:    #0EA5E9;
+
+      /* Fonts */
+      --font: 'Geist', system-ui, sans-serif;
+      --font-mono: 'Geist Mono', 'Fira Code', monospace;
+    }
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background: var(--g-50);
+      color: var(--g-700);
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.65;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Typography ─── */
+    h1, h2, h3 {
+      font-family: var(--font);
+      color: var(--g-900);
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    section.block > .wrap > h2 { margin-bottom: 2rem; }
+    h1 { font-size: 2.875rem; font-weight: 700; line-height: 1.07; }
+    h2 { font-size: 1.875rem; font-weight: 600; line-height: 1.15; }
+    h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+
+    h4 {
+      font-family: var(--font);
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--g-500);
+      margin: 0 0 0.75rem;
+    }
+
+    p { margin: 0 0 1.25rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .lead {
+      font-size: 1.125rem;
+      color: var(--g-500);
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    small, .small {
+      font-family: var(--font);
+      font-size: 0.78rem;
+      color: var(--g-500);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.83em;
+      background: var(--g-100);
+      color: var(--g-900);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      border: 1px solid var(--g-200);
+    }
+
+    strong { color: var(--g-900); font-weight: 600; }
+    em { font-style: italic; }
+    mark {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+    }
+    kbd {
+      font-family: var(--font-mono);
+      font-size: 0.78em;
+      background: var(--g-100);
+      border: 1px solid var(--g-200);
+      border-bottom-width: 2px;
+      padding: 0.12em 0.5em;
+      border-radius: 5px;
+      color: var(--g-700);
+    }
+
+    ul, ol { padding-left: 1.5rem; }
+    li { margin-bottom: 0.3rem; }
+    ol li::marker { font-family: var(--font-mono); font-size: 0.85em; }
+
+    /* ─── Layout ─── */
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    section.block {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--g-200);
+    }
+
+    .section-label {
+      font-family: var(--font);
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--g-300);
+      margin-bottom: 0.375rem;
+    }
+
+    hr { border: none; border-top: 1px solid var(--g-200); margin: 2rem 0; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+    /* ─── Color Swatches ─── */
+    .swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.875rem;
+    }
+    .swatch-block {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      border: 1px solid var(--g-200);
+      flex-shrink: 0;
+    }
+    .swatch-name {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--g-900);
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--g-500);
+      margin-top: 0.1rem;
+    }
+    .swatch-desc {
+      font-size: 0.75rem;
+      color: var(--g-500);
+      margin-top: 0.1rem;
+    }
+
+    /* ─── Tags ─── */
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 0.18em 0.6em;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .tag-default { background: var(--g-100); color: var(--g-500); border: 1px solid var(--g-200); }
+    .tag-accent  { background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent-mid); }
+    .tag-green   { background: rgba(22,163,74,.08); color: var(--u-green); border: 1px solid rgba(22,163,74,.2); }
+    .tag-red     { background: rgba(220,38,38,.08); color: var(--u-red); border: 1px solid rgba(220,38,38,.2); }
+    .tag-amber   { background: rgba(217,119,6,.08); color: var(--u-amber); border: 1px solid rgba(217,119,6,.2); }
+    .tag-sky     { background: rgba(14,165,233,.08); color: var(--u-sky); border: 1px solid rgba(14,165,233,.2); }
+
+    /* ─── Status dot ─── */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.84rem;
+      color: var(--g-700);
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── Stat cards ─── */
+    .stat {
+      background: var(--g-0);
+      border: 1px solid var(--g-200);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--g-900);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--g-500);
+      margin-top: 0.35rem;
+    }
+
+    /* ─── Font specimens ─── */
+    .specimen {
+      border: 1px solid var(--g-200);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.25rem;
+      background: var(--g-0);
+    }
+    .specimen-meta {
+      font-size: 0.75rem;
+      color: var(--g-500);
+      margin-bottom: 0.75rem;
+    }
+    .specimen-aa {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0.25rem 0 0.75rem;
+      color: var(--g-900);
+      letter-spacing: -0.04em;
+    }
+    .specimen-sample {
+      font-size: 1.25rem;
+      margin: 0 0 0.75rem;
+      color: var(--g-700);
+    }
+    .specimen-chars {
+      color: var(--g-300);
+      font-size: 0.9rem;
+      word-break: break-all;
+      line-height: 1.7;
+    }
+
+    /* ─── Code blocks ─── */
+    .code-block {
+      background: var(--g-900);
+      border: 1px solid var(--g-900);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.2);
+    }
+    .code-lang {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,.35);
+      letter-spacing: 0.05em;
+    }
+    .code-block pre {
+      padding: 1.25rem 1rem;
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      color: #D4D4D0;
+    }
+
+    /* Syntax colors */
+    .syn-comment { color: #636360; }
+    .syn-keyword { color: #79C0FF; }
+    .syn-fn      { color: #D2A8FF; }
+    .syn-str     { color: #A5D6FF; }
+    .syn-tag     { color: #7EE787; }
+    .syn-num     { color: #FFA657; }
+    .syn-var     { color: #FF7B72; }
+
+    /* ─── Callouts ─── */
+    .callout {
+      border-left: 3px solid;
+      border-radius: 0 8px 8px 0;
+      padding: 0.875rem 1.125rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .callout.note    { border-color: var(--u-green);  background: rgba(22,163,74,.06);  color: var(--g-700); }
+    .callout.tip     { border-color: var(--accent);   background: var(--accent-light);  color: var(--g-700); }
+    .callout.danger  { border-color: var(--u-red);    background: rgba(220,38,38,.06);  color: var(--g-700); }
+    .callout.info    { border-color: var(--u-sky);    background: rgba(14,165,233,.06); color: var(--g-700); }
+    .callout strong  { color: var(--g-900); }
+
+    /* ─── Blockquote ─── */
+    blockquote {
+      border-left: 2px solid var(--accent);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.05rem;
+      color: var(--g-700);
+    }
+    blockquote cite {
+      font-style: normal;
+      font-size: 0.8rem;
+      color: var(--g-500);
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    /* ─── Tables ─── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+    thead th {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      color: var(--g-500);
+      border-bottom: 1px solid var(--g-200);
+    }
+    tbody td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--g-100);
+      color: var(--g-700);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* ─── Buttons ─── */
+    .btn {
+      font-family: var(--font);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.5rem 1.125rem;
+      border-radius: 7px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      text-decoration: none;
+      transition: all 0.12s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--g-900);
+      color: var(--g-0);
+    }
+    .btn-primary:hover {
+      background: var(--g-700);
+      text-decoration: none;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--g-700);
+      border: 1px solid var(--g-200);
+    }
+    .btn-ghost:hover {
+      border-color: var(--g-300);
+      color: var(--g-900);
+      text-decoration: none;
+      background: var(--g-100);
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: var(--g-0);
+      font-weight: 600;
+    }
+    .btn-accent:hover {
+      filter: brightness(1.1);
+      text-decoration: none;
+    }
+    .btn-danger {
+      background: rgba(220,38,38,.09);
+      color: var(--u-red);
+      border: 1px solid rgba(220,38,38,.2);
+    }
+    .btn-danger:hover {
+      background: rgba(220,38,38,.15);
+      border-color: rgba(220,38,38,.35);
+      text-decoration: none;
+    }
+    .btn-sm {
+      font-size: 0.775rem;
+      padding: 0.3rem 0.75rem;
+    }
+
+    /* ─── Project card ─── */
+    .project-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--g-0);
+      border: 1px solid var(--g-200);
+      border-radius: 10px;
+      padding: 0.875rem 1rem;
+    }
+    .project-card + .project-card { margin-top: 0.5rem; }
+
+    /* ─── Icon pill ─── */
+    .icon-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--g-500);
+      background: var(--g-0);
+      border: 1px solid var(--g-200);
+      padding: 0.3em 0.7em;
+      border-radius: 5px;
+      cursor: default;
+      transition: color 0.12s, border-color 0.12s;
+    }
+    .icon-pill:hover { color: var(--accent); border-color: var(--accent-mid); }
+
+    /* ─── Scale row ─── */
+    .scale-row {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--g-100);
+    }
+    .scale-row:last-child { border-bottom: none; }
+
+    /* ─── Header ─── */
+    .site-header {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--g-200);
+    }
+    .logo {
+      font-family: var(--font);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--g-900);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo:hover { text-decoration: none; }
+    .logo span { color: var(--accent); }
+
+    .site-nav a {
+      font-size: 0.84rem;
+      color: var(--g-500);
+      margin-left: 1.5rem;
+      text-decoration: none;
+    }
+    .site-nav a:hover { color: var(--g-900); }
+
+    /* ─── Footer ─── */
+    .site-footer {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ━━━━ HEADER ━━━━ -->
+  <header class="site-header">
+    <a href="#" style="display:flex;align-items:center;text-decoration:none;">
+      <svg width="80" height="46" viewBox="0 0 283 163" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M134.083 115.891V111.217H137.046C137.769 111.217 138.298 111.106 138.632 110.883C138.993 110.688 139.271 110.327 139.466 109.798L139.925 108.504H138.214L130.368 87.2617H136.753L141.887 102.662L146.686 87.2617H153.072L144.474 111.76C143.973 113.234 143.25 114.292 142.304 114.931C141.358 115.571 140.037 115.891 138.339 115.891H134.083Z" fill="black"/><path d="M115.455 109.631V87.2617H121.381L121.59 93.7722L121.131 93.647C121.492 91.3934 122.132 89.7658 123.05 88.7641C123.969 87.7625 125.235 87.2617 126.848 87.2617H128.893V92.4368H126.848C125.68 92.4368 124.72 92.5898 123.969 92.8958C123.217 93.2019 122.647 93.6888 122.258 94.3565C121.896 95.0243 121.715 95.9285 121.715 97.0692V109.631H115.455Z" fill="black"/><path d="M100.205 110.135C97.924 110.135 95.9347 109.662 94.2375 108.716C92.5403 107.742 91.2187 106.379 90.2727 104.626C89.3267 102.873 88.8538 100.814 88.8538 98.4492C88.8538 96.0843 89.3267 94.0393 90.2727 92.3143C91.2187 90.5615 92.5403 89.1982 94.2375 88.2244C95.9347 87.2506 97.924 86.7637 100.205 86.7637C102.487 86.7637 104.476 87.2506 106.173 88.2244C107.871 89.1982 109.192 90.5615 110.138 92.3143C111.084 94.0393 111.557 96.0843 111.557 98.4492C111.557 100.814 111.084 102.873 110.138 104.626C109.192 106.379 107.871 107.742 106.173 108.716C104.476 109.662 102.487 110.135 100.205 110.135ZM100.205 105.335C101.764 105.335 102.974 104.737 103.836 103.541C104.699 102.317 105.13 100.619 105.13 98.4492C105.13 96.2791 104.699 94.5958 103.836 93.3994C102.974 92.1752 101.764 91.5631 100.205 91.5631C98.6474 91.5631 97.4371 92.1752 96.5746 93.3994C95.7121 94.5958 95.2808 96.2791 95.2808 98.4492C95.2808 100.619 95.7121 102.317 96.5746 103.541C97.4371 104.737 98.6474 105.335 100.205 105.335Z" fill="black"/><path d="M81.3149 109.628C79.0056 109.628 77.3084 109.099 76.2234 108.042C75.1383 106.957 74.5957 105.246 74.5957 102.909V82H80.8558V102.158C80.8558 103.243 81.0784 103.98 81.5236 104.37C81.9966 104.759 82.6922 104.954 83.6103 104.954H86.7404V109.628H81.3149ZM71.0066 91.9327V87.2585H86.7404V91.9327H71.0066Z" fill="black"/><path d="M58.3492 110.135C56.0678 110.135 54.0785 109.662 52.3813 108.716C50.6841 107.742 49.3625 106.379 48.4165 104.626C47.4705 102.873 46.9976 100.814 46.9976 98.4492C46.9976 96.0843 47.4705 94.0393 48.4165 92.3143C49.3625 90.5615 50.6841 89.1982 52.3813 88.2244C54.0785 87.2506 56.0678 86.7637 58.3492 86.7637C60.3247 86.7637 62.0914 87.1115 63.6495 87.807C65.2354 88.5026 66.5152 89.5042 67.489 90.8119C68.4628 92.1196 69.061 93.6915 69.2836 95.5278L62.8148 95.82C62.62 94.4288 62.1192 93.3855 61.3124 92.6899C60.5333 91.9665 59.5456 91.6048 58.3492 91.6048C56.7912 91.6048 55.5809 92.203 54.7184 93.3994C53.8559 94.5958 53.4246 96.2791 53.4246 98.4492C53.4246 100.619 53.8559 102.317 54.7184 103.541C55.5809 104.737 56.7912 105.335 58.3492 105.335C59.5456 105.335 60.5472 104.974 61.3541 104.25C62.161 103.499 62.6479 102.372 62.8148 100.87L69.2836 101.12C69.0888 102.957 68.5046 104.556 67.5308 105.92C66.5848 107.255 65.3189 108.298 63.733 109.05C62.1749 109.773 60.3803 110.135 58.3492 110.135Z" fill="black"/><path d="M30.4708 110.135C28.1615 110.135 26.2695 109.606 24.7949 108.549C23.3481 107.464 22.6248 105.961 22.6248 104.042C22.6248 102.066 23.2369 100.55 24.4611 99.4926C25.7131 98.4075 27.5494 97.6146 29.97 97.1137L37.19 95.6948C37.19 94.248 36.8561 93.1629 36.1884 92.4395C35.5484 91.6883 34.6164 91.3127 33.3922 91.3127C32.1958 91.3127 31.2637 91.5909 30.596 92.1474C29.9282 92.676 29.497 93.469 29.3022 94.5262L23.0004 94.2341C23.4177 91.7857 24.5167 89.9355 26.2974 88.6834C28.1058 87.4036 30.4708 86.7637 33.3922 86.7637C36.7309 86.7637 39.235 87.5566 40.9043 89.1425C42.6015 90.7284 43.4501 93.0516 43.4501 96.1121V103.749C43.4501 104.389 43.5475 104.821 43.7422 105.043C43.9648 105.238 44.2848 105.335 44.7021 105.335H45.3281V109.634C45.1334 109.69 44.8134 109.745 44.3683 109.801C43.9509 109.857 43.5336 109.884 43.1162 109.884C42.2259 109.884 41.3912 109.731 40.6122 109.425C39.861 109.119 39.2489 108.605 38.7759 107.881C38.3029 107.13 38.0664 106.073 38.0664 104.709L38.6089 105.127C38.3307 106.128 37.8299 107.005 37.1065 107.756C36.4109 108.507 35.4928 109.091 34.3521 109.509C33.2391 109.926 31.9454 110.135 30.4708 110.135ZM31.9732 105.836C33.0026 105.836 33.9069 105.641 34.6859 105.252C35.465 104.835 36.0771 104.236 36.5222 103.457C36.9674 102.678 37.19 101.76 37.19 100.703V99.6178L32.0984 100.703C31.0968 100.898 30.3317 101.232 29.803 101.704C29.3022 102.15 29.0518 102.734 29.0518 103.457C29.0518 104.209 29.3022 104.793 29.803 105.21C30.3038 105.628 31.0272 105.836 31.9732 105.836Z" fill="black"/><path d="M0 109.631V80H20.4497V85.342H2.83792L6.34359 81.7111V95.2747L2.83792 92.5202H19.6985V97.7787H2.83792L6.34359 95.0243V109.631H0Z" fill="black"/><path d="M274.154 64.8447C270.135 64.8447 266.999 63.8401 264.747 61.8308C262.494 59.8215 261.367 56.5641 261.367 52.0584V0H275.067V50.5972C275.067 52.0584 275.402 53.0935 276.072 53.7024C276.741 54.3113 277.716 54.6157 278.994 54.6157H282.282V64.8447H274.154Z" fill="black"/><path d="M232.527 65.9361C227.534 65.9361 223.181 64.9011 219.467 62.8309C215.813 60.6999 212.952 57.7164 210.882 53.8805C208.872 50.0446 207.868 45.539 207.868 40.3636C207.868 35.1882 208.872 30.713 210.882 26.938C212.952 23.1021 215.813 20.1186 219.467 17.9876C223.12 15.8565 227.443 14.791 232.436 14.791C237.307 14.791 241.538 15.8565 245.131 17.9876C248.723 20.1186 251.493 23.163 253.442 27.1206C255.451 31.0783 256.456 35.797 256.456 41.2769V44.0168H222.024C222.207 47.9136 223.242 50.8057 225.129 52.6932C227.078 54.5807 229.635 55.5245 232.801 55.5245C235.115 55.5245 237.033 55.0374 238.555 54.0632C240.138 53.089 241.264 51.5972 241.934 49.588L255.725 50.4099C254.446 55.2809 251.737 59.0864 247.596 61.8263C243.456 64.5662 238.433 65.9361 232.527 65.9361ZM222.024 35.6144H242.391C242.208 32.0221 241.203 29.343 239.377 27.5773C237.611 25.8116 235.297 24.9287 232.436 24.9287C229.574 24.9287 227.199 25.8725 225.312 27.76C223.485 29.5866 222.389 32.2047 222.024 35.6144Z" fill="black"/><path d="M132.442 64.8402V15.887H144.772L145.228 27.6686L143.95 27.1206C144.619 24.5025 145.624 22.2801 146.963 20.4535C148.364 18.6269 150.038 17.2265 151.987 16.2523C153.935 15.2781 156.066 14.791 158.38 14.791C162.459 14.791 165.747 15.9783 168.243 18.3529C170.801 20.7275 172.445 23.9241 173.175 27.9426L171.44 28.0339C171.988 25.1723 172.932 22.7672 174.271 20.8188C175.672 18.8096 177.377 17.3178 179.386 16.3436C181.395 15.3086 183.648 14.791 186.144 14.791C189.554 14.791 192.477 15.4912 194.912 16.8916C197.348 18.292 199.235 20.3926 200.575 23.1934C201.914 25.9333 202.584 29.3126 202.584 33.3311V64.8402H188.884V37.167C188.884 33.3311 188.306 30.4694 187.149 28.5819C185.992 26.6336 184.105 25.6594 181.486 25.6594C179.842 25.6594 178.442 26.116 177.285 27.0293C176.128 27.9426 175.215 29.2821 174.545 31.0479C173.936 32.7527 173.632 34.8533 173.632 37.3497V64.8402H161.302V37.3497C161.302 33.5747 160.754 30.6825 159.658 28.6733C158.562 26.664 156.675 25.6594 153.996 25.6594C152.352 25.6594 150.921 26.116 149.703 27.0293C148.547 27.9426 147.664 29.2821 147.055 31.0479C146.446 32.8136 146.141 34.9142 146.141 37.3497V64.8402H132.442Z" fill="black"/><path d="M92.7366 65.9361C87.6829 65.9361 83.5426 64.7793 80.3156 62.4656C77.1495 60.091 75.5664 56.8031 75.5664 52.6019C75.5664 48.2789 76.9059 44.9606 79.585 42.6468C82.3249 40.2722 86.3434 38.537 91.6406 37.441L107.441 34.3358C107.441 31.1696 106.71 28.795 105.249 27.212C103.848 25.568 101.809 24.7461 99.1297 24.7461C96.5116 24.7461 94.4718 25.3549 93.0105 26.5727C91.5493 27.7295 90.6055 29.4648 90.1793 31.7785L76.3884 31.1392C77.3017 25.7811 79.7067 21.7321 83.6035 18.9922C87.5612 16.1914 92.7366 14.791 99.1297 14.791C106.436 14.791 111.916 16.5263 115.569 19.9969C119.283 23.4674 121.14 28.5515 121.14 35.2491V51.9626C121.14 53.363 121.353 54.3067 121.78 54.7938C122.267 55.22 122.967 55.4331 123.88 55.4331H125.25V64.8402C124.824 64.962 124.124 65.0837 123.15 65.2055C122.236 65.3273 121.323 65.3882 120.41 65.3882C118.461 65.3882 116.635 65.0533 114.93 64.3835C113.286 63.7138 111.946 62.5874 110.911 61.0043C109.876 59.3603 109.359 57.0466 109.359 54.0632L110.546 54.9765C109.937 57.1684 108.841 59.0864 107.258 60.7303C105.736 62.3743 103.727 63.6529 101.23 64.5662C98.7948 65.4795 95.9636 65.9361 92.7366 65.9361ZM96.0245 56.5291C98.2773 56.5291 100.256 56.1029 101.961 55.2505C103.666 54.3372 105.005 53.0281 105.979 51.3233C106.954 49.6184 107.441 47.6091 107.441 45.2954V42.9208L96.2984 45.2954C94.1065 45.7216 92.4321 46.4523 91.2753 47.4874C90.1793 48.4616 89.6313 49.7402 89.6313 51.3233C89.6313 52.9672 90.1793 54.2458 91.2753 55.1591C92.3712 56.0724 93.9543 56.5291 96.0245 56.5291Z" fill="black"/><path d="M62.549 64.8447C58.5304 64.8447 55.3947 63.8401 53.1419 61.8308C50.8891 59.8215 49.7627 56.5641 49.7627 52.0584V0H63.4623V50.5972C63.4623 52.0584 63.7972 53.0935 64.4669 53.7024C65.1367 54.3113 66.1109 54.6157 67.3895 54.6157H70.6774V64.8447H62.549Z" fill="black"/><path d="M0.0681152 64.8447V0H44.8201V11.6903H6.2786L13.9504 3.74455V33.427L6.2786 27.3992H43.1762V38.9068H6.2786L13.9504 32.879V64.8447H0.0681152Z" fill="black"/><path d="M189 163H282V82H168V113C168 121.284 161.284 128 153 128H0V163H168H189Z" fill="#207BF9"/></svg>
+    </a>
+    <nav class="site-nav">
+      <a href="#colors">Couleurs</a>
+      <a href="#fonts">Typo</a>
+      <a href="#components">Composants</a>
+      <a href="#devis">Devis</a>
+    </nav>
+  </header>
+
+  <!-- ━━━━ HERO ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">Brand System</p>
+      <h1>Flamel Factory <span style="color: var(--accent);">v0.1</span></h1>
+      <p class="lead" style="max-width: 520px; margin-top: 0.875rem;">
+        Design system & identité visuelle. Dev senior + design émergent — on fabrique des projets qui comptent.
+      </p>
+      <div style="display: flex; gap: 0.5rem; margin-top: 1.75rem; flex-wrap: wrap; align-items: center;">
+        <span class="tag tag-default">Design System</span>
+        <span class="tag tag-green">Actif</span>
+        <span class="tag tag-accent">v0.1</span>
+        <span style="font-size: 0.75rem; color: var(--g-300); margin-left: 0.25rem;">2026-05-26</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 01 — COULEURS ━━━━ -->
+  <section class="block" id="colors">
+    <div class="wrap">
+      <p class="section-label">01 — Couleurs</p>
+      <h2>Palette</h2>
+
+      <!-- Accent — large et bien visible -->
+      <div style="margin-top: 2rem; margin-bottom: 2.5rem;">
+        <div style="background: var(--accent); border-radius: 12px; height: 100px; margin-bottom: 0.875rem;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <div style="font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; color: var(--g-900);">accent</div>
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--g-500);">#207BF9 — Liens, CTA, mise en valeur</div>
+        </div>
+      </div>
+
+      <!-- Greyscale — tous côte à côte -->
+      <h4>Nuances de gris</h4>
+      <div style="display: flex; gap: 6px; margin-bottom: 2.5rem; margin-top: 1rem;">
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-0); width: 100%; height: 64px; border-radius: 8px;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-0</div>
+          <div class="swatch-hex">#FFF</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-50); width: 100%; height: 64px; border-radius: 8px;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-50</div>
+          <div class="swatch-hex">#FAFAF9</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-100); width: 100%; height: 64px; border-radius: 8px;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-100</div>
+          <div class="swatch-hex">#F2F2F0</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-200); width: 100%; height: 64px; border-radius: 8px;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-200</div>
+          <div class="swatch-hex">#E4E4E0</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-300); width: 100%; height: 64px; border-radius: 8px;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-300</div>
+          <div class="swatch-hex">#CBCBC6</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-500); width: 100%; height: 64px; border-radius: 8px; border-color: transparent;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-500</div>
+          <div class="swatch-hex">#87877F</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-700); width: 100%; height: 64px; border-radius: 8px; border-color: transparent;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-700</div>
+          <div class="swatch-hex">#3A3A36</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="swatch-block" style="background: var(--g-900); width: 100%; height: 64px; border-radius: 8px; border-color: transparent;"></div>
+          <div class="swatch-name" style="margin-top: 0.5rem;">g-900</div>
+          <div class="swatch-hex">#0E0E0C</div>
+        </div>
+      </div>
+
+      <h4>Utilitaires</h4>
+      <div class="grid-2" style="margin-bottom: 2.5rem;">
+        <div class="swatch-row" style="margin-bottom: 0;">
+          <div class="swatch-block" style="background: var(--u-green); border-color: transparent;"></div>
+          <div><div class="swatch-name">green</div><div class="swatch-hex">#16A34A</div><div class="swatch-desc">Livré, succès</div></div>
+        </div>
+        <div class="swatch-row" style="margin-bottom: 0;">
+          <div class="swatch-block" style="background: var(--u-red); border-color: transparent;"></div>
+          <div><div class="swatch-name">red</div><div class="swatch-hex">#DC2626</div><div class="swatch-desc">Erreur, bloquant</div></div>
+        </div>
+        <div class="swatch-row" style="margin-bottom: 0;">
+          <div class="swatch-block" style="background: var(--u-amber); border-color: transparent;"></div>
+          <div><div class="swatch-name">amber</div><div class="swatch-hex">#D97706</div><div class="swatch-desc">Attention, en attente</div></div>
+        </div>
+        <div class="swatch-row" style="margin-bottom: 0;">
+          <div class="swatch-block" style="background: var(--u-sky); border-color: transparent;"></div>
+          <div><div class="swatch-name">sky</div><div class="swatch-hex">#0EA5E9</div><div class="swatch-desc">Info, neutre</div></div>
+        </div>
+      </div>
+
+      <h4 style="margin-top: 0;">Boutons</h4>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; align-items: center;">
+        <button class="btn btn-primary">Primaire</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-accent">Envoyer le devis</button>
+        <button class="btn btn-danger">Supprimer</button>
+        <button class="btn btn-ghost" style="opacity: 0.4; cursor: not-allowed;" disabled>Désactivé</button>
+      </div>
+
+      <hr />
+
+      <h4>Tags</h4>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <span class="tag tag-default">default</span>
+        <span class="tag tag-accent">flamel</span>
+        <span class="tag tag-green">livré</span>
+        <span class="tag tag-red">urgent</span>
+        <span class="tag tag-amber">en attente</span>
+        <span class="tag tag-sky">info</span>
+      </div>
+
+      <h4>Statuts projet</h4>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem;">
+        <div class="status"><span class="dot" style="background: var(--u-green);"></span> Livré</div>
+        <div class="status"><span class="dot" style="background: var(--accent);"></span> En cours</div>
+        <div class="status"><span class="dot" style="background: var(--u-amber);"></span> En attente</div>
+        <div class="status"><span class="dot" style="background: var(--u-red);"></span> Annulé</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ━━━━ 02 — POLICES ━━━━ -->
+  <section class="block" id="fonts">
+    <div class="wrap">
+      <p class="section-label">02 — Polices</p>
+      <h2>Typographie</h2>
+
+      <div class="specimen" style="margin-top: 2rem;">
+        <div class="specimen-meta">Primary · Geist · Titres, corps, UI — weights 300–700</div>
+        <div class="specimen-aa" style="font-family: var(--font);">Aa</div>
+        <div class="specimen-sample" style="font-family: var(--font);">Flamel Factory fabrique des projets qui comptent.</div>
+        <div class="specimen-chars" style="font-family: var(--font);">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 !?@#&()[]{}–—«»</div>
+      </div>
+
+      <div class="specimen">
+        <div class="specimen-meta">Mono · Geist Mono · Code, tokens, références techniques</div>
+        <div class="specimen-aa" style="font-family: var(--font-mono);">Aa</div>
+        <div class="specimen-sample" style="font-family: var(--font-mono);">--accent: #207BF9; // bleu électrique</div>
+        <div class="specimen-chars" style="font-family: var(--font-mono);">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 !?@#&()[]{}–—</div>
+      </div>
+
+      <!-- Weights showcase -->
+      <div style="border: 1px solid var(--g-200); border-radius: 12px; padding: 2rem; background: var(--g-0);">
+        <div class="specimen-meta" style="margin-bottom: 1.25rem;">Geist — graisses</div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--g-300); width: 60px; flex-shrink: 0;">300</span>
+            <span style="font-weight: 300; font-size: 1.5rem; color: var(--g-900); letter-spacing: -0.02em;">Flamel Factory</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--g-300); width: 60px; flex-shrink: 0;">400</span>
+            <span style="font-weight: 400; font-size: 1.5rem; color: var(--g-900); letter-spacing: -0.02em;">Flamel Factory</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--g-300); width: 60px; flex-shrink: 0;">500</span>
+            <span style="font-weight: 500; font-size: 1.5rem; color: var(--g-900); letter-spacing: -0.02em;">Flamel Factory</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--g-300); width: 60px; flex-shrink: 0;">600</span>
+            <span style="font-weight: 600; font-size: 1.5rem; color: var(--g-900); letter-spacing: -0.02em;">Flamel Factory</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--g-300); width: 60px; flex-shrink: 0;">700</span>
+            <span style="font-weight: 700; font-size: 1.5rem; color: var(--g-900); letter-spacing: -0.02em;">Flamel Factory</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 03 — ÉCHELLE TYPOGRAPHIQUE ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">03 — Échelle typographique</p>
+      <h2>Hiérarchie</h2>
+
+      <div class="scale-row">
+        <h4>H1 · 46px · weight 700 · tracking -0.02em</h4>
+        <div style="font-size: 2.875rem; font-weight: 700; line-height: 1.07; letter-spacing: -0.02em; color: var(--g-900); margin-top: 0.5rem;">Titre principal de la page</div>
+      </div>
+      <div class="scale-row">
+        <h4>H2 · 30px · weight 600 · tracking -0.02em</h4>
+        <div style="font-size: 1.875rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--g-900); margin-top: 0.5rem;">Section majeure du document</div>
+      </div>
+      <div class="scale-row">
+        <h4>H3 · 20px · weight 600</h4>
+        <div style="font-size: 1.25rem; font-weight: 600; line-height: 1.3; color: var(--g-900); margin-top: 0.5rem;">Sous-section ou groupe de contenu</div>
+      </div>
+      <div class="scale-row">
+        <h4>Lead · 18px · weight 400 · g-500</h4>
+        <div style="font-size: 1.125rem; font-weight: 400; line-height: 1.65; color: var(--g-500); margin-top: 0.5rem;">Accroche ou intro de section. Légèrement plus grand et plus aéré que le corps.</div>
+      </div>
+      <div class="scale-row">
+        <h4>Body · 17px · weight 400 · g-700</h4>
+        <div style="font-size: 17px; font-weight: 400; line-height: 1.65; color: var(--g-700); margin-top: 0.5rem;">Corps de texte standard, optimisé pour la lecture avec un interlignage à 1.65 et une colonne contrainte à 780px max.</div>
+      </div>
+      <div class="scale-row">
+        <h4>Small · 12.5px · weight 400 · g-500</h4>
+        <div style="font-size: 0.78rem; font-weight: 400; color: var(--g-500); margin-top: 0.5rem;">Métadonnées, dates, notes de bas de page, labels discrets et secondaires.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 04 — STYLES INLINE ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">04 — Styles inline</p>
+      <h2>Mise en forme</h2>
+
+      <p>Voici un <a href="#">lien vers une page</a> dans le corps du texte. Couleur accent, soulignement au hover.</p>
+      <p>Du texte en <strong>gras</strong> pour les points structurants ou les données clés à retenir.</p>
+      <p>Du texte en <em>italique</em> pour les emphases et les références spécifiques.</p>
+      <p>Du texte <u>souligné</u> dans un contexte éditorial précis et intentionnel.</p>
+      <p>Du texte <mark>surligné en bleu</mark> pour une mise en valeur forte et ciblée.</p>
+      <p>Référence à <code>un token</code> ou une <code>var(--accent)</code> dans une phrase de texte.</p>
+      <p>Raccourci clavier <kbd>⌘ K</kbd> pour la recherche, <kbd>⌘ D</kbd> pour dupliquer.</p>
+      <p><small>Note : les styles inline doivent rester intentionnels. Un seul usage par paragraphe max.</small></p>
+    </div>
+  </section>
+
+  <!-- ━━━━ 05 — LISTES ━━━━ -->
+  <!-- ━━━━ 06 — TABLEAUX ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">06 — Tableaux</p>
+      <h2>Tableaux</h2>
+
+      <h4 style="margin-top: 2rem;">Tableau devis</h4>
+      <div style="border: 1px solid var(--g-200); border-radius: 10px; overflow: hidden; margin-bottom: 2.5rem; background: var(--g-0);">
+        <table>
+          <thead>
+            <tr style="background: var(--g-50);">
+              <th>Prestation</th>
+              <th>Détail</th>
+              <th>Qté</th>
+              <th style="text-align: right;">Prix HT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 500; color: var(--g-900);">Design UI</td>
+              <td style="color: var(--g-500);">Maquettes Figma complètes</td>
+              <td>1</td>
+              <td style="font-family: var(--font-mono); font-size: 0.875rem; text-align: right;">1 200 €</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--g-900);">Développement</td>
+              <td style="color: var(--g-500);">Next.js + CMS headless</td>
+              <td>1</td>
+              <td style="font-family: var(--font-mono); font-size: 0.875rem; text-align: right;">2 800 €</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--g-900);">Hébergement</td>
+              <td style="color: var(--g-500);">Vercel Pro, 1 an</td>
+              <td>1</td>
+              <td style="font-family: var(--font-mono); font-size: 0.875rem; text-align: right;">240 €</td>
+            </tr>
+            <tr style="background: var(--g-50);">
+              <td colspan="3" style="font-weight: 600; color: var(--g-900); border-bottom: none;">Total HT</td>
+              <td style="font-family: var(--font-mono); font-weight: 700; color: var(--accent); text-align: right; font-size: 1rem; border-bottom: none;">4 240 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Tableau de specs</h4>
+      <div style="border: 1px solid var(--g-200); border-radius: 10px; overflow: hidden; background: var(--g-0);">
+        <table>
+          <tbody>
+            <tr>
+              <td style="font-family: var(--font-mono); color: var(--g-500); width: 38%; font-size: 0.82rem; border-bottom: 1px solid var(--g-100);">framework</td>
+              <td style="border-bottom: 1px solid var(--g-100);">Next.js 15 App Router</td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-mono); color: var(--g-500); font-size: 0.82rem; border-bottom: 1px solid var(--g-100);">styling</td>
+              <td style="border-bottom: 1px solid var(--g-100);">Tailwind CSS v4</td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-mono); color: var(--g-500); font-size: 0.82rem; border-bottom: 1px solid var(--g-100);">cms</td>
+              <td style="border-bottom: 1px solid var(--g-100);">Sanity.io</td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-mono); color: var(--g-500); font-size: 0.82rem; border-bottom: 1px solid var(--g-100);">deploy</td>
+              <td style="border-bottom: 1px solid var(--g-100);">Vercel</td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-mono); color: var(--g-500); font-size: 0.82rem;">domaine</td>
+              <td>Inclus 1 an</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 07 — CITATIONS & CALLOUTS ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">07 — Citations & callouts</p>
+      <h2>Callouts & blockquote</h2>
+
+      <blockquote>
+        Un bon design est presque invisible. Ce qui reste, c'est la clarté — et la confiance qu'elle inspire.
+        <cite>— Flamel Factory, 2026</cite>
+      </blockquote>
+
+      <div class="callout note">
+        <strong>Note</strong> — Ce document est la base de tous les devis et propositions commerciales. Toujours partir de ce fichier.
+      </div>
+      <div class="callout tip">
+        <strong>Tip</strong> — Pour générer un PDF, ouvre le devis dans Chrome et fais Imprimer → Enregistrer en PDF. Format A4, marges minimales.
+      </div>
+      <div class="callout danger">
+        <strong>Bloquant</strong> — Contenu client manquant. Le développement ne peut pas démarrer sans les textes et visuels finaux.
+      </div>
+      <div class="callout info">
+        <strong>Info</strong> — Acompte de 50% requis pour démarrage. Virement uniquement.
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 08 — CODE ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">08 — Code</p>
+      <h2>Blocs de code</h2>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-lang">typescript</span>
+          <button class="btn btn-ghost btn-sm" style="color: rgba(255,255,255,.4); border-color: rgba(255,255,255,.1);">Copier</button>
+        </div>
+        <pre><span class="syn-comment">// Composant Next.js type Flamel Factory</span>
+<span class="syn-keyword">export default function</span> <span class="syn-fn">HeroSection</span>({ title, subtitle }: <span class="syn-fn">Props</span>) {
+  <span class="syn-keyword">return</span> (
+    &lt;<span class="syn-tag">section</span> className=<span class="syn-str">"relative overflow-hidden py-24"</span>&gt;
+      &lt;<span class="syn-tag">h1</span> className=<span class="syn-str">"text-5xl font-bold tracking-tight"</span>&gt;{title}&lt;/<span class="syn-tag">h1</span>&gt;
+      &lt;<span class="syn-tag">p</span> className=<span class="syn-str">"text-muted mt-4 text-lg"</span>&gt;{subtitle}&lt;/<span class="syn-tag">p</span>&gt;
+    &lt;/<span class="syn-tag">section</span>&gt;
+  )
+}</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-lang">bash</span>
+          <button class="btn btn-ghost btn-sm" style="color: rgba(255,255,255,.4); border-color: rgba(255,255,255,.1);">Copier</button>
+        </div>
+        <pre>npx create-next-app@latest <span class="syn-str">mon-projet</span> \
+  --typescript --tailwind --app \
+  --src-dir --import-alias <span class="syn-str">"@/*"</span></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-lang">css</span>
+          <button class="btn btn-ghost btn-sm" style="color: rgba(255,255,255,.4); border-color: rgba(255,255,255,.1);">Copier</button>
+        </div>
+        <pre><span class="syn-comment">/* Flamel Factory — tokens CSS */</span>
+<span class="syn-tag">:root</span> {
+  <span class="syn-var">--accent</span>:       <span class="syn-str">#207BF9</span>;
+  <span class="syn-var">--font</span>:         <span class="syn-str">'Geist'</span>, system-ui, sans-serif;
+  <span class="syn-var">--font-mono</span>:    <span class="syn-str">'Geist Mono'</span>, monospace;
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 09 — IMAGES ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">09 — Images</p>
+      <h2>Images & médias</h2>
+
+      <figure style="margin: 0;">
+        <div style="background: var(--g-100); border: 1px solid var(--g-200); border-radius: 12px; height: 260px; display: flex; align-items: center; justify-content: center; color: var(--g-300); font-family: var(--font-mono); font-size: 0.84rem;">
+          [ aperçu image · mockup · capture projet ]
+        </div>
+        <figcaption style="font-size: 0.8rem; color: var(--g-500); margin-top: 0.875rem; text-align: center; line-height: 1.6;">
+          Fig. 1 — Capture d'écran hero section, projet client. Déployé sur Vercel, domaine configuré.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ━━━━ 10 — ICÔNES ━━━━ -->
+  <section class="block">
+    <div class="wrap">
+      <p class="section-label">10 — Icônes</p>
+      <h2>Icônes</h2>
+
+      <p>
+        Librairie : <a href="https://lucide.dev">Lucide Icons</a> — trait régulier, 24px, stroke-width 1.5.
+        Couleur par défaut <code>--g-500</code>, hover <code>--accent</code>.
+      </p>
+
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem;">
+        <span class="icon-pill">home</span>
+        <span class="icon-pill">file-text</span>
+        <span class="icon-pill">pen-tool</span>
+        <span class="icon-pill">code-2</span>
+        <span class="icon-pill">terminal</span>
+        <span class="icon-pill">bookmark</span>
+        <span class="icon-pill">tag</span>
+        <span class="icon-pill">mail</span>
+        <span class="icon-pill">github</span>
+        <span class="icon-pill">linkedin</span>
+        <span class="icon-pill">arrow-right</span>
+        <span class="icon-pill">check</span>
+        <span class="icon-pill">clock</span>
+        <span class="icon-pill">calendar</span>
+        <span class="icon-pill">globe</span>
+        <span class="icon-pill">zap</span>
+        <span class="icon-pill">layers</span>
+        <span class="icon-pill">send</span>
+        <span class="icon-pill">download</span>
+        <span class="icon-pill">external-link</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━ 12 — EN CONTEXTE — DEVIS ━━━━ -->
+  <section class="block" id="devis">
+    <div class="wrap">
+      <p class="section-label">12 — En contexte — Devis</p>
+      <h2>Exemple complet de devis</h2>
+
+      <!-- ─ Styles devis ─ -->
+      <style>
+        .devis-page {
+          width: 620px;
+          margin: 0 auto;
+          padding: 2.5rem 2.75rem;
+          background: var(--g-0);
+          border: 1px solid var(--g-200);
+          border-radius: 4px;
+          aspect-ratio: 210 / 297;
+          overflow: hidden;
+          box-shadow: 0 4px 24px rgba(0,0,0,.06);
+          font-size: 0.875rem;
+          line-height: 1.55;
+          display: flex;
+          flex-direction: column;
+        }
+        .devis-h4 {
+          font-family: var(--font);
+          font-size: 0.68rem;
+          font-weight: 600;
+          letter-spacing: 0.09em;
+          text-transform: uppercase;
+          color: var(--g-500);
+          margin: 0 0 0.4rem;
+        }
+        .devis-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.8rem;
+        }
+        .devis-table th {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 400;
+          letter-spacing: 0.04em;
+          text-align: left;
+          padding: 0.4rem 0.625rem;
+          color: var(--g-500);
+          border-bottom: 1px solid var(--g-100);
+        }
+        .devis-table td {
+          padding: 0.4rem 0.625rem;
+          border-bottom: 1px solid var(--g-100);
+          color: var(--g-700);
+        }
+        .devis-table tr:last-child td { border-bottom: none; }
+      </style>
+
+      <!-- ── PAGE 1 — RECTO ── -->
+      <article class="devis-page" style="margin-top: 2rem;">
+
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--g-100);">
+          <div>
+            <svg width="70" height="40" viewBox="0 0 283 163" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-bottom:0.3rem;"><path d="M134.083 115.891V111.217H137.046C137.769 111.217 138.298 111.106 138.632 110.883C138.993 110.688 139.271 110.327 139.466 109.798L139.925 108.504H138.214L130.368 87.2617H136.753L141.887 102.662L146.686 87.2617H153.072L144.474 111.76C143.973 113.234 143.25 114.292 142.304 114.931C141.358 115.571 140.037 115.891 138.339 115.891H134.083Z" fill="black"/><path d="M115.455 109.631V87.2617H121.381L121.59 93.7722L121.131 93.647C121.492 91.3934 122.132 89.7658 123.05 88.7641C123.969 87.7625 125.235 87.2617 126.848 87.2617H128.893V92.4368H126.848C125.68 92.4368 124.72 92.5898 123.969 92.8958C123.217 93.2019 122.647 93.6888 122.258 94.3565C121.896 95.0243 121.715 95.9285 121.715 97.0692V109.631H115.455Z" fill="black"/><path d="M100.205 110.135C97.924 110.135 95.9347 109.662 94.2375 108.716C92.5403 107.742 91.2187 106.379 90.2727 104.626C89.3267 102.873 88.8538 100.814 88.8538 98.4492C88.8538 96.0843 89.3267 94.0393 90.2727 92.3143C91.2187 90.5615 92.5403 89.1982 94.2375 88.2244C95.9347 87.2506 97.924 86.7637 100.205 86.7637C102.487 86.7637 104.476 87.2506 106.173 88.2244C107.871 89.1982 109.192 90.5615 110.138 92.3143C111.084 94.0393 111.557 96.0843 111.557 98.4492C111.557 100.814 111.084 102.873 110.138 104.626C109.192 106.379 107.871 107.742 106.173 108.716C104.476 109.662 102.487 110.135 100.205 110.135ZM100.205 105.335C101.764 105.335 102.974 104.737 103.836 103.541C104.699 102.317 105.13 100.619 105.13 98.4492C105.13 96.2791 104.699 94.5958 103.836 93.3994C102.974 92.1752 101.764 91.5631 100.205 91.5631C98.6474 91.5631 97.4371 92.1752 96.5746 93.3994C95.7121 94.5958 95.2808 96.2791 95.2808 98.4492C95.2808 100.619 95.7121 102.317 96.5746 103.541C97.4371 104.737 98.6474 105.335 100.205 105.335Z" fill="black"/><path d="M81.3149 109.628C79.0056 109.628 77.3084 109.099 76.2234 108.042C75.1383 106.957 74.5957 105.246 74.5957 102.909V82H80.8558V102.158C80.8558 103.243 81.0784 103.98 81.5236 104.37C81.9966 104.759 82.6922 104.954 83.6103 104.954H86.7404V109.628H81.3149ZM71.0066 91.9327V87.2585H86.7404V91.9327H71.0066Z" fill="black"/><path d="M58.3492 110.135C56.0678 110.135 54.0785 109.662 52.3813 108.716C50.6841 107.742 49.3625 106.379 48.4165 104.626C47.4705 102.873 46.9976 100.814 46.9976 98.4492C46.9976 96.0843 47.4705 94.0393 48.4165 92.3143C49.3625 90.5615 50.6841 89.1982 52.3813 88.2244C54.0785 87.2506 56.0678 86.7637 58.3492 86.7637C60.3247 86.7637 62.0914 87.1115 63.6495 87.807C65.2354 88.5026 66.5152 89.5042 67.489 90.8119C68.4628 92.1196 69.061 93.6915 69.2836 95.5278L62.8148 95.82C62.62 94.4288 62.1192 93.3855 61.3124 92.6899C60.5333 91.9665 59.5456 91.6048 58.3492 91.6048C56.7912 91.6048 55.5809 92.203 54.7184 93.3994C53.8559 94.5958 53.4246 96.2791 53.4246 98.4492C53.4246 100.619 53.8559 102.317 54.7184 103.541C55.5809 104.737 56.7912 105.335 58.3492 105.335C59.5456 105.335 60.5472 104.974 61.3541 104.25C62.161 103.499 62.6479 102.372 62.8148 100.87L69.2836 101.12C69.0888 102.957 68.5046 104.556 67.5308 105.92C66.5848 107.255 65.3189 108.298 63.733 109.05C62.1749 109.773 60.3803 110.135 58.3492 110.135Z" fill="black"/><path d="M30.4708 110.135C28.1615 110.135 26.2695 109.606 24.7949 108.549C23.3481 107.464 22.6248 105.961 22.6248 104.042C22.6248 102.066 23.2369 100.55 24.4611 99.4926C25.7131 98.4075 27.5494 97.6146 29.97 97.1137L37.19 95.6948C37.19 94.248 36.8561 93.1629 36.1884 92.4395C35.5484 91.6883 34.6164 91.3127 33.3922 91.3127C32.1958 91.3127 31.2637 91.5909 30.596 92.1474C29.9282 92.676 29.497 93.469 29.3022 94.5262L23.0004 94.2341C23.4177 91.7857 24.5167 89.9355 26.2974 88.6834C28.1058 87.4036 30.4708 86.7637 33.3922 86.7637C36.7309 86.7637 39.235 87.5566 40.9043 89.1425C42.6015 90.7284 43.4501 93.0516 43.4501 96.1121V103.749C43.4501 104.389 43.5475 104.821 43.7422 105.043C43.9648 105.238 44.2848 105.335 44.7021 105.335H45.3281V109.634C45.1334 109.69 44.8134 109.745 44.3683 109.801C43.9509 109.857 43.5336 109.884 43.1162 109.884C42.2259 109.884 41.3912 109.731 40.6122 109.425C39.861 109.119 39.2489 108.605 38.7759 107.881C38.3029 107.13 38.0664 106.073 38.0664 104.709L38.6089 105.127C38.3307 106.128 37.8299 107.005 37.1065 107.756C36.4109 108.507 35.4928 109.091 34.3521 109.509C33.2391 109.926 31.9454 110.135 30.4708 110.135ZM31.9732 105.836C33.0026 105.836 33.9069 105.641 34.6859 105.252C35.465 104.835 36.0771 104.236 36.5222 103.457C36.9674 102.678 37.19 101.76 37.19 100.703V99.6178L32.0984 100.703C31.0968 100.898 30.3317 101.232 29.803 101.704C29.3022 102.15 29.0518 102.734 29.0518 103.457C29.0518 104.209 29.3022 104.793 29.803 105.21C30.3038 105.628 31.0272 105.836 31.9732 105.836Z" fill="black"/><path d="M0 109.631V80H20.4497V85.342H2.83792L6.34359 81.7111V95.2747L2.83792 92.5202H19.6985V97.7787H2.83792L6.34359 95.0243V109.631H0Z" fill="black"/><path d="M274.154 64.8447C270.135 64.8447 266.999 63.8401 264.747 61.8308C262.494 59.8215 261.367 56.5641 261.367 52.0584V0H275.067V50.5972C275.067 52.0584 275.402 53.0935 276.072 53.7024C276.741 54.3113 277.716 54.6157 278.994 54.6157H282.282V64.8447H274.154Z" fill="black"/><path d="M232.527 65.9361C227.534 65.9361 223.181 64.9011 219.467 62.8309C215.813 60.6999 212.952 57.7164 210.882 53.8805C208.872 50.0446 207.868 45.539 207.868 40.3636C207.868 35.1882 208.872 30.713 210.882 26.938C212.952 23.1021 215.813 20.1186 219.467 17.9876C223.12 15.8565 227.443 14.791 232.436 14.791C237.307 14.791 241.538 15.8565 245.131 17.9876C248.723 20.1186 251.493 23.163 253.442 27.1206C255.451 31.0783 256.456 35.797 256.456 41.2769V44.0168H222.024C222.207 47.9136 223.242 50.8057 225.129 52.6932C227.078 54.5807 229.635 55.5245 232.801 55.5245C235.115 55.5245 237.033 55.0374 238.555 54.0632C240.138 53.089 241.264 51.5972 241.934 49.588L255.725 50.4099C254.446 55.2809 251.737 59.0864 247.596 61.8263C243.456 64.5662 238.433 65.9361 232.527 65.9361ZM222.024 35.6144H242.391C242.208 32.0221 241.203 29.343 239.377 27.5773C237.611 25.8116 235.297 24.9287 232.436 24.9287C229.574 24.9287 227.199 25.8725 225.312 27.76C223.485 29.5866 222.389 32.2047 222.024 35.6144Z" fill="black"/><path d="M132.442 64.8402V15.887H144.772L145.228 27.6686L143.95 27.1206C144.619 24.5025 145.624 22.2801 146.963 20.4535C148.364 18.6269 150.038 17.2265 151.987 16.2523C153.935 15.2781 156.066 14.791 158.38 14.791C162.459 14.791 165.747 15.9783 168.243 18.3529C170.801 20.7275 172.445 23.9241 173.175 27.9426L171.44 28.0339C171.988 25.1723 172.932 22.7672 174.271 20.8188C175.672 18.8096 177.377 17.3178 179.386 16.3436C181.395 15.3086 183.648 14.791 186.144 14.791C189.554 14.791 192.477 15.4912 194.912 16.8916C197.348 18.292 199.235 20.3926 200.575 23.1934C201.914 25.9333 202.584 29.3126 202.584 33.3311V64.8402H188.884V37.167C188.884 33.3311 188.306 30.4694 187.149 28.5819C185.992 26.6336 184.105 25.6594 181.486 25.6594C179.842 25.6594 178.442 26.116 177.285 27.0293C176.128 27.9426 175.215 29.2821 174.545 31.0479C173.936 32.7527 173.632 34.8533 173.632 37.3497V64.8402H161.302V37.3497C161.302 33.5747 160.754 30.6825 159.658 28.6733C158.562 26.664 156.675 25.6594 153.996 25.6594C152.352 25.6594 150.921 26.116 149.703 27.0293C148.547 27.9426 147.664 29.2821 147.055 31.0479C146.446 32.8136 146.141 34.9142 146.141 37.3497V64.8402H132.442Z" fill="black"/><path d="M92.7366 65.9361C87.6829 65.9361 83.5426 64.7793 80.3156 62.4656C77.1495 60.091 75.5664 56.8031 75.5664 52.6019C75.5664 48.2789 76.9059 44.9606 79.585 42.6468C82.3249 40.2722 86.3434 38.537 91.6406 37.441L107.441 34.3358C107.441 31.1696 106.71 28.795 105.249 27.212C103.848 25.568 101.809 24.7461 99.1297 24.7461C96.5116 24.7461 94.4718 25.3549 93.0105 26.5727C91.5493 27.7295 90.6055 29.4648 90.1793 31.7785L76.3884 31.1392C77.3017 25.7811 79.7067 21.7321 83.6035 18.9922C87.5612 16.1914 92.7366 14.791 99.1297 14.791C106.436 14.791 111.916 16.5263 115.569 19.9969C119.283 23.4674 121.14 28.5515 121.14 35.2491V51.9626C121.14 53.363 121.353 54.3067 121.78 54.7938C122.267 55.22 122.967 55.4331 123.88 55.4331H125.25V64.8402C124.824 64.962 124.124 65.0837 123.15 65.2055C122.236 65.3273 121.323 65.3882 120.41 65.3882C118.461 65.3882 116.635 65.0533 114.93 64.3835C113.286 63.7138 111.946 62.5874 110.911 61.0043C109.876 59.3603 109.359 57.0466 109.359 54.0632L110.546 54.9765C109.937 57.1684 108.841 59.0864 107.258 60.7303C105.736 62.3743 103.727 63.6529 101.23 64.5662C98.7948 65.4795 95.9636 65.9361 92.7366 65.9361ZM96.0245 56.5291C98.2773 56.5291 100.256 56.1029 101.961 55.2505C103.666 54.3372 105.005 53.0281 105.979 51.3233C106.954 49.6184 107.441 47.6091 107.441 45.2954V42.9208L96.2984 45.2954C94.1065 45.7216 92.4321 46.4523 91.2753 47.4874C90.1793 48.4616 89.6313 49.7402 89.6313 51.3233C89.6313 52.9672 90.1793 54.2458 91.2753 55.1591C92.3712 56.0724 93.9543 56.5291 96.0245 56.5291Z" fill="black"/><path d="M62.549 64.8447C58.5304 64.8447 55.3947 63.8401 53.1419 61.8308C50.8891 59.8215 49.7627 56.5641 49.7627 52.0584V0H63.4623V50.5972C63.4623 52.0584 63.7972 53.0935 64.4669 53.7024C65.1367 54.3113 66.1109 54.6157 67.3895 54.6157H70.6774V64.8447H62.549Z" fill="black"/><path d="M0.0681152 64.8447V0H44.8201V11.6903H6.2786L13.9504 3.74455V33.427L6.2786 27.3992H43.1762V38.9068H6.2786L13.9504 32.879V64.8447H0.0681152Z" fill="black"/><path d="M189 163H282V82H168V113C168 121.284 161.284 128 153 128H0V163H168H189Z" fill="#207BF9"/></svg>
+            <div class="small">Damian & Samuel Abadie</div>
+            <div class="small"><a href="#">flamelfactory@gmail.com</a></div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.72rem; color: var(--g-500); font-family: var(--font-mono); margin-bottom: 0.25rem;">Devis n°2026-003</div>
+            <div class="small" style="display: block;">Émis le 2026-05-26</div>
+            <div class="small" style="display: block;">Valable 30 jours</div>
+          </div>
+        </div>
+
+        <!-- Objet + client côte à côte -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+          <div>
+            <div class="devis-h4">Objet</div>
+            <div style="font-size: 1rem; font-weight: 600; color: var(--g-900); line-height: 1.3;">Création d'un site vitrine & identité visuelle</div>
+          </div>
+          <div>
+            <div class="devis-h4">À l'attention de</div>
+            <div style="font-size: 0.875rem; color: var(--g-700); line-height: 1.6;">
+              <strong style="color: var(--g-900);">Prénom Nom</strong><br>
+              Société ou activité<br>
+              <a href="#" style="color: var(--g-500);">email@domaine.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau principal -->
+        <div style="flex: 1;">
+          <div style="border: 1px solid var(--g-200); border-radius: 8px; overflow: hidden;">
+            <table class="devis-table">
+              <thead>
+                <tr style="background: var(--g-50);">
+                  <th style="width: 45%;">Prestation</th>
+                  <th style="text-align: center;">Qté</th>
+                  <th style="text-align: right;">Prix unitaire HT</th>
+                  <th style="text-align: right;">Total HT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 500; color: var(--g-900);">Design & identité visuelle</td>
+                  <td style="text-align: center; color: var(--g-500); font-family: var(--font-mono);">1</td>
+                  <td style="font-family: var(--font-mono); text-align: right;">1 200 €</td>
+                  <td style="font-family: var(--font-mono); text-align: right; font-weight: 500; color: var(--g-900);">1 200 €</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--g-900);">Développement web</td>
+                  <td style="text-align: center; color: var(--g-500); font-family: var(--font-mono);">1</td>
+                  <td style="font-family: var(--font-mono); text-align: right;">1 800 €</td>
+                  <td style="font-family: var(--font-mono); text-align: right; font-weight: 500; color: var(--g-900);">1 800 €</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--g-900);">Hébergement & domaine</td>
+                  <td style="text-align: center; color: var(--g-500); font-family: var(--font-mono);">1</td>
+                  <td style="font-family: var(--font-mono); text-align: right;">200 €</td>
+                  <td style="font-family: var(--font-mono); text-align: right; font-weight: 500; color: var(--g-900);">200 €</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--g-900);">Suivi post-livraison</td>
+                  <td style="text-align: center; color: var(--g-500); font-family: var(--font-mono);">3</td>
+                  <td style="font-family: var(--font-mono); text-align: right;">100 €</td>
+                  <td style="font-family: var(--font-mono); text-align: right; font-weight: 500; color: var(--g-900);">300 €</td>
+                </tr>
+                <tr style="background: var(--g-50);">
+                  <td colspan="3" style="font-weight: 600; color: var(--g-900); border-bottom: none; padding-top: 0.75rem; padding-bottom: 0.75rem;">Total HT</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700; color: var(--accent); text-align: right; font-size: 1rem; border-bottom: none; padding-top: 0.75rem; padding-bottom: 0.75rem;">3 500 €</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 0.72rem; color: var(--g-500); margin: 0.625rem 0 0;">TVA non applicable — Art. 293 B du CGI</p>
+        </div>
+
+        <!-- Pied de page -->
+        <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--g-100); display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.68rem; color: var(--g-300); font-family: var(--font-mono);">flamel.factory · devis n°2026-003</span>
+          <span style="font-size: 0.68rem; color: var(--g-300); font-family: var(--font-mono);">1 / 2</span>
+        </div>
+
+      </article>
+
+      <!-- ── PAGE 2 — VERSO ── -->
+      <article class="devis-page" style="margin-top: 1.5rem;">
+
+        <!-- Header léger -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--g-100);">
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--g-900); letter-spacing: -0.02em;">
+            flamel<span style="color: var(--accent);">.</span>factory
+          </div>
+          <span style="font-size: 0.72rem; color: var(--g-500); font-family: var(--font-mono);">Devis n°2026-003 — suite</span>
+        </div>
+
+        <!-- Paiement -->
+        <div style="margin-bottom: 2.5rem;">
+          <div class="devis-h4">Paiement</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="border: 1px solid var(--g-200); border-radius: 8px; padding: 1.25rem;">
+              <div style="font-size: 0.68rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Acompte — à la signature</div>
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--g-900); font-family: var(--font-mono); letter-spacing: -0.02em;">1 750 €</div>
+              <div style="font-size: 0.75rem; color: var(--g-500); margin-top: 0.25rem;">50% du total HT</div>
+            </div>
+            <div style="border: 1px solid var(--accent-mid); border-radius: 8px; padding: 1.25rem; background: var(--accent-light);">
+              <div style="font-size: 0.68rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Solde — à la livraison</div>
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono); letter-spacing: -0.02em;">1 750 €</div>
+              <div style="font-size: 0.75rem; color: var(--g-500); margin-top: 0.25rem;">50% du total HT</div>
+            </div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--g-500); margin: 0.75rem 0 0;">Virement bancaire uniquement — IBAN fourni sur demande.</p>
+        </div>
+
+        <!-- Conditions -->
+        <div style="margin-bottom: 2.5rem;">
+          <div class="devis-h4">Conditions</div>
+          <div style="border: 1px solid var(--g-200); border-radius: 8px; overflow: hidden;">
+            <table class="devis-table">
+              <tbody>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-500); width: 40%;">délai</td>
+                  <td>4 semaines après réception de l'acompte</td>
+                </tr>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-500);">révisions</td>
+                  <td>2 cycles inclus par phase</td>
+                </tr>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-500);">droits</td>
+                  <td>Cession complète à réception du solde</td>
+                </tr>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-500);">validité</td>
+                  <td>30 jours à compter de l'émission</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Signatures -->
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 1rem;">
+          <div class="devis-h4">Signatures</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 500; color: var(--g-700); margin-bottom: 1.5rem;">Flamel Factory</div>
+              <div style="height: 52px; border-bottom: 1px solid var(--g-300); margin-bottom: 0.5rem;"></div>
+              <div style="font-size: 0.72rem; color: var(--g-500);">Damian & Samuel Abadie</div>
+            </div>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 500; color: var(--g-700); margin-bottom: 1.5rem;">Client — Bon pour accord</div>
+              <div style="height: 52px; border-bottom: 1px solid var(--g-300); margin-bottom: 0.5rem;"></div>
+              <div style="font-size: 0.72rem; color: var(--g-500);">Précéder de "Lu et approuvé"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pied de page -->
+        <div style="padding-top: 1rem; border-top: 1px solid var(--g-100); display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+          <span style="font-size: 0.68rem; color: var(--g-300); font-family: var(--font-mono);">flamel.factory · devis n°2026-003</span>
+          <span style="font-size: 0.68rem; color: var(--g-300); font-family: var(--font-mono);">2 / 2</span>
+        </div>
+
+      </article>
+    </div>
+  </section>
+
+  <!-- ━━━━ FOOTER ━━━━ -->
+  <footer class="site-footer">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; padding-top: 2rem; border-top: 1px solid var(--g-200);">
+      <div>
+        <div style="font-size: 1rem; font-weight: 700; color: var(--g-900); letter-spacing: -0.02em; margin-bottom: 0.375rem;">
+          flamel<span style="color: var(--accent);">.</span>factory
+        </div>
+        <div class="small">Design × Développement</div>
+        <div class="small">Damian & Samuel Abadie</div>
+      </div>
+      <div style="text-align: right;">
+        <div class="small" style="margin-bottom: 0.25rem;"><a href="#">flamelfactory@gmail.com</a></div>
+        <div class="small" style="margin-bottom: 0.25rem;"><a href="#">GitHub</a> · <a href="#">LinkedIn</a></div>
+        <div class="small">© 2026 Flamel Factory</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
