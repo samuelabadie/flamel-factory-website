@@ -1083,24 +1083,52 @@
         <!-- Paiement -->
         <div style="margin-bottom: 2.5rem;">
           <div class="devis-h4">Paiement</div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
-            <div style="border: 1px solid var(--g-200); border-radius: 8px; padding: 1rem;">
-              <div style="font-size: 0.62rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Sprint 1 — S1 à S3</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--g-900); font-family: var(--font-mono); letter-spacing: -0.02em;">8 850 €</div>
-              <div style="font-size: 0.68rem; color: var(--g-500); margin-top: 0.25rem;">Design + Dev kickoff</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="border: 1px solid var(--g-200); border-radius: 8px; padding: 1.25rem;">
+              <div style="font-size: 0.62rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Acompte — à la signature</div>
+              <div style="font-size: 1.25rem; font-weight: 700; color: var(--g-900); font-family: var(--font-mono); letter-spacing: -0.02em;">18 675 €</div>
+              <div style="font-size: 0.68rem; color: var(--g-500); margin-top: 0.25rem;">50% du total HT</div>
             </div>
-            <div style="border: 1px solid var(--g-200); border-radius: 8px; padding: 1rem;">
-              <div style="font-size: 0.62rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Sprint 2 — S4 à S6</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--g-900); font-family: var(--font-mono); letter-spacing: -0.02em;">14 250 €</div>
-              <div style="font-size: 0.68rem; color: var(--g-500); margin-top: 0.25rem;">Dev phase 1</div>
-            </div>
-            <div style="border: 1px solid var(--g-200); border-radius: 8px; padding: 1rem;">
-              <div style="font-size: 0.62rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Sprint 3 — S7 à S9</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--g-900); font-family: var(--font-mono); letter-spacing: -0.02em;">14 250 €</div>
-              <div style="font-size: 0.68rem; color: var(--g-500); margin-top: 0.25rem;">Dev phase 2 + livraison</div>
+            <div style="border: 1px solid var(--g-200); border-radius: 8px; padding: 1.25rem;">
+              <div style="font-size: 0.62rem; color: var(--g-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Solde — à la livraison</div>
+              <div style="font-size: 1.25rem; font-weight: 700; color: var(--g-900); font-family: var(--font-mono); letter-spacing: -0.02em;">18 675 €</div>
+              <div style="font-size: 0.68rem; color: var(--g-500); margin-top: 0.25rem;">50% du total HT</div>
             </div>
           </div>
-          <p style="font-size: 0.68rem; color: var(--g-500); margin: 0.75rem 0 0;">Facturation à la fin de chaque sprint · Virement bancaire uniquement — IBAN fourni sur demande.</p>
+          <p style="font-size: 0.68rem; color: var(--g-500); margin: 0.75rem 0 0;">Virement bancaire uniquement — IBAN fourni sur demande.</p>
+        </div>
+
+        <!-- Planning -->
+        <div style="margin-bottom: 2rem;">
+          <div class="devis-h4">Planning</div>
+          <div style="border: 1px solid var(--g-200); border-radius: 8px; overflow: hidden;">
+            <table class="devis-table">
+              <thead>
+                <tr style="background: var(--g-50);">
+                  <th style="width: 28%;">Sprint</th>
+                  <th style="width: 28%;">Semaines</th>
+                  <th>Contenu</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-900); font-weight: 500;">Sprint 1</td>
+                  <td style="font-family: var(--font-mono); color: var(--g-500);">S1 → S3</td>
+                  <td>Design (12j) + Dev kickoff (3j)</td>
+                </tr>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-900); font-weight: 500;">Sprint 2</td>
+                  <td style="font-family: var(--font-mono); color: var(--g-500);">S4 → S6</td>
+                  <td>Développement phase 1 (15j)</td>
+                </tr>
+                <tr>
+                  <td style="font-family: var(--font-mono); color: var(--g-900); font-weight: 500;">Sprint 3</td>
+                  <td style="font-family: var(--font-mono); color: var(--g-500);">S7 → S9</td>
+                  <td>Développement phase 2 + livraison (15j)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- Conditions -->
